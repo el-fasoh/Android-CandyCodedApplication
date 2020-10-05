@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 
 public class InfoActivity extends AppCompatActivity {
     private final String ADDRESS = "geo:0,0?q=618 E South St Orlando, FL 32801";
+    private final String PHONE = "tel:0123456789";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         Uri uri = Uri.parse("android.resource://com.codeschool.candycoded/" + R.drawable.store_front);
-        ImageView candyStoreImageView = (ImageView)findViewById(R.id.image_view_candy_store);
+        ImageView candyStoreImageView = (ImageView) findViewById(R.id.image_view_candy_store);
         Picasso.with(this).
                 load(uri).
                 into(candyStoreImageView);
@@ -34,11 +35,18 @@ public class InfoActivity extends AppCompatActivity {
         Uri uri = Uri.parse(ADDRESS);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
         mapIntent.setPackage("com.google.android.apps.maps");
-        if(mapIntent.resolveActivity(getPackageManager()) != null){
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(mapIntent);
         }
     }
     // ***
     // TODO - Task 3 - Launch the Phone Activity
     // ***
+
+    public void createPhoneIntent(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse(PHONE));
+        startActivity(intent);
+
+    }
 }
